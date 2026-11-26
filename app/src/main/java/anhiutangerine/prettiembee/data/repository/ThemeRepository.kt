@@ -68,6 +68,45 @@ class ThemeRepository(private val context: Context) {
 
     companion object {
         const val REMOTE_CATALOG_URL = "https://raw.githubusercontent.com/PrettieMBee/PrettieMBee/theme/community_catalog.json"
+        const val RELEASE_BASE_URL = "https://github.com/PrettieMBee/PrettieMBee/releases/download/v1.0.0-themes"
+        const val RELEASE_CATALOG_URL = "$RELEASE_BASE_URL/community_catalog.json"
+    }
+
+    private fun buildReleaseZipUrl(themeId: String): String {
+        return "$RELEASE_BASE_URL/$themeId.zip"
+    }
+
+    private fun openConnectionFollowingRedirects(
+        initialUrl: String,
+        connectTimeoutMs: Int,
+        readTimeoutMs: Int,
+        maxRedirects: Int = 5
+    ): HttpURLConnection {
+        var currentUrl = initialUrl
+        var redirectCount = 0
+        while (redirectCount < maxRedirects) {
+            val conn = (URL(currentUrl).openConnection() as HttpURLConnection).apply {
+                connectTimeout = connectTimeoutMs
+                readTimeout = readTimeoutMs
+                instanceFollowRedirects = false
+            }
+            val code = conn.responseCode
+            if (code == HttpURLConnection.HTTP_MOVED_PERM ||
+                code == HttpURLConnection.HTTP_MOVED_TEMP ||
+                code == HttpURLConnection.HTTP_SEE_OTHER ||
+                code == 307 || code == 308
+            ) {
+                val location = conn.getHeaderField("Location")
+                conn.disconnect()
+                if (!location.isNullOrBlank()) {
+                    currentUrl = URL(URL(currentUrl), location).toString()
+                    redirectCount++
+                    continue
+                }
+            }
+            return conn
+        }
+        throw Exception("Too many redirects for $initialUrl")
     }
 
     private val remoteCatalogCacheFile: File
@@ -77,25 +116,32 @@ class ThemeRepository(private val context: Context) {
         val baseList = mutableListOf<CommunityTheme>()
         var jsonContent: String? = null
 
-        // Try fetching online catalog from GitHub theme branch
-        try {
-            val url = URL(REMOTE_CATALOG_URL)
-            val conn = (url.openConnection() as HttpURLConnection).apply {
-                connectTimeout = 8000
-                readTimeout = 12000
-                instanceFollowRedirects = true
-            }
-            if (conn.responseCode in 200..299) {
-                val fetched = conn.inputStream.bufferedReader().use { it.readText() }
-                if (fetched.isNotBlank()) {
-                    jsonContent = fetched
-                    try {
-                        remoteCatalogCacheFile.writeText(fetched)
-                    } catch (_: Exception) {}
+        // Try fetching online catalog from GitHub theme branch, then fallback to GitHub Release
+        for (catalogUrl in listOf(REMOTE_CATALOG_URL, RELEASE_CATALOG_URL)) {
+            var conn: HttpURLConnection? = null
+            try {
+                conn = openConnectionFollowingRedirects(
+                    initialUrl = catalogUrl,
+                    connectTimeoutMs = 8000,
+                    readTimeoutMs = 12000
+                )
+                if (conn.responseCode in 200..299) {
+                    val fetched = conn.inputStream.bufferedReader().use { it.readText() }
+                    if (fetched.isNotBlank()) {
+                        // Validate JSON structure before accepting & caching
+                        json.decodeFromString<List<CommunityTheme>>(fetched)
+                        jsonContent = fetched
+                        try {
+                            remoteCatalogCacheFile.writeText(fetched)
+                        } catch (_: Exception) {}
+                        break
+                    }
                 }
+            } catch (_: Exception) {
+                // Failed from this source, try next fallback
+            } finally {
+                conn?.disconnect()
             }
-        } catch (e: Exception) {
-            // Network failed or offline, fallback to cache or asset
         }
 
         // If remote fetch failed, use cached remote catalog
@@ -152,47 +198,63 @@ class ThemeRepository(private val context: Context) {
         theme: CommunityTheme,
         onProgress: (Float) -> Unit
     ): Result<File> = withContext(Dispatchers.IO) {
-        val downloadUrl = theme.downloadUrl ?: return@withContext Result.failure(Exception(context.getString(anhiutangerine.prettiembee.R.string.error_no_download_url)))
-        try {
-            val destDir = getThemeDir(theme.id)
+        val candidateUrls = buildList {
+            theme.downloadUrl?.takeIf { it.isNotBlank() }?.let { add(it) }
+            if (!theme.isCustomImport) {
+                add(buildReleaseZipUrl(theme.id))
+            }
+        }.distinct()
+
+        if (candidateUrls.isEmpty()) {
+            return@withContext Result.failure(
+                Exception(context.getString(anhiutangerine.prettiembee.R.string.error_no_download_url))
+            )
+        }
+
+        val destDir = getThemeDir(theme.id)
+        var lastError: Exception? = null
+
+        for (candidateUrl in candidateUrls) {
+            val attempt = downloadAndExtractFromUrl(
+                downloadUrl = candidateUrl,
+                themeId = theme.id,
+                destDir = destDir,
+                onProgress = onProgress
+            )
+            if (attempt.isSuccess) {
+                return@withContext attempt
+            }
+            lastError = attempt.exceptionOrNull() as? Exception
+                ?: Exception(attempt.exceptionOrNull()?.message ?: context.getString(anhiutangerine.prettiembee.R.string.error_cannot_connect))
+        }
+
+        Result.failure(lastError ?: Exception(context.getString(anhiutangerine.prettiembee.R.string.error_cannot_connect)))
+    }
+
+    private fun downloadAndExtractFromUrl(
+        downloadUrl: String,
+        themeId: String,
+        destDir: File,
+        onProgress: (Float) -> Unit
+    ): Result<File> {
+        val tempZip = File(context.cacheDir, "${themeId}_temp.zip")
+        var conn: HttpURLConnection? = null
+        return try {
             // Wipe any leftover Magisk junk / partial extracts before unpack
             if (destDir.exists()) destDir.deleteRecursively()
             destDir.mkdirs()
 
-            val tempZip = File(context.cacheDir, "${theme.id}_temp.zip")
-            var currentUrl = downloadUrl
-            var conn: HttpURLConnection? = null
-            var redirectCount = 0
-
-            while (redirectCount < 5) {
-                val url = URL(currentUrl)
-                conn = url.openConnection() as HttpURLConnection
-                conn.connectTimeout = 15000
-                conn.readTimeout = 60000
-                conn.instanceFollowRedirects = true
-
-                val code = conn.responseCode
-                if (code == HttpURLConnection.HTTP_MOVED_PERM ||
-                    code == HttpURLConnection.HTTP_MOVED_TEMP ||
-                    code == 307 || code == 308) {
-                    val location = conn.getHeaderField("Location")
-                    conn.disconnect()
-                    if (!location.isNullOrBlank()) {
-                        currentUrl = location
-                        redirectCount++
-                        continue
-                    }
-                }
-                break
+            conn = openConnectionFollowingRedirects(
+                initialUrl = downloadUrl,
+                connectTimeoutMs = 15000,
+                readTimeoutMs = 60000
+            )
+            if (conn.responseCode !in 200..299) {
+                return Result.failure(Exception("HTTP error ${conn.responseCode}: ${conn.responseMessage}"))
             }
 
-            val finalConn = conn ?: return@withContext Result.failure(Exception(context.getString(anhiutangerine.prettiembee.R.string.error_cannot_connect)))
-            if (finalConn.responseCode !in 200..299) {
-                return@withContext Result.failure(Exception("HTTP error ${finalConn.responseCode}: ${finalConn.responseMessage}"))
-            }
-
-            val fileLength = finalConn.contentLengthLong.takeIf { it > 0 } ?: finalConn.contentLength.toLong()
-            finalConn.inputStream.use { input ->
+            val fileLength = conn.contentLengthLong.takeIf { it > 0 } ?: conn.contentLength.toLong()
+            conn.inputStream.use { input ->
                 FileOutputStream(tempZip).use { output ->
                     val buffer = ByteArray(16384)
                     var total: Long = 0
@@ -209,7 +271,6 @@ class ThemeRepository(private val context: Context) {
 
             // Unpack tempZip into destDir
             unzipFile(tempZip, destDir)
-            tempZip.delete()
             normalizeExtractedStructure(destDir)
 
             if (!hasValidThemeLayout(destDir)) {
@@ -218,7 +279,7 @@ class ThemeRepository(private val context: Context) {
                     ?.joinToString(limit = 8) { it.name }
                     .orEmpty()
                 destDir.deleteRecursively()
-                return@withContext Result.failure(
+                return Result.failure(
                     Exception(
                         if (listing.isNotBlank()) {
                             context.getString(anhiutangerine.prettiembee.R.string.error_zip_contents, listing)
@@ -231,7 +292,11 @@ class ThemeRepository(private val context: Context) {
 
             Result.success(destDir)
         } catch (e: Exception) {
+            if (destDir.exists()) destDir.deleteRecursively()
             Result.failure(e)
+        } finally {
+            conn?.disconnect()
+            if (tempZip.exists()) tempZip.delete()
         }
     }
 
