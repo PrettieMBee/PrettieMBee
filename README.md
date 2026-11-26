@@ -45,6 +45,12 @@ File APK được tạo tại `app/build/outputs/apk/debug/app-debug.apk`. Workf
 
 PrettieMBee chỉ thay đổi ảnh và tệp cấu hình màu trong thư mục `app_flutter/app_theme` của MB Bank. Ứng dụng không chỉnh sửa mã nguồn, tệp `.dex` hay cơ chế xác thực của ngân hàng. Dự án phục vụ cá nhân hoá giao diện phi thương mại; người dùng tự chịu trách nhiệm khi sử dụng trên thiết bị của mình.
 
+## Credits
+
+- **Chủ repo & phát triển ứng dụng:** anhiutangerine ([premierere](https://github.com/premierere))
+- **Kho theme gốc & cộng đồng:** [cuynu](https://cuynutt.ddns.net/mbcp/tweaked-mbflutter-themes) cùng cộng đồng trong và ngoài MBCP
+- **Đóng góp theme:** cuynu, TsumugiShiina0, nguyencaoantuong, khoictm, Fukiame, minhwuangbeo, Meowice
+
 ## Giấy phép
 
 Phát hành theo giấy phép [GPL-3.0](LICENSE).
