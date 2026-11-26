@@ -69,4 +69,4 @@ Mỗi file ZIP tuân thủ cấu trúc chuẩn của PrettieMBee:
 ## Nguồn
 
 - Theme cộng đồng từ kho MBCP (`cuynutt.ddns.net/mbcp/tweaked-mbflutter-themes`)
-- Ứng dụng PrettieMBee: https://github.com/premierere/PrettieMBee
+- Ứng dụng PrettieMBee: https://github.com/PrettieMBee/PrettieMBee
