@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![PrettieMBee Banner](https://raw.githubusercontent.com/thanhhuybynight/PrettieMBee/main/cat_logo_a2.png)
+![PrettieMBee Banner](app/src/main/res/drawable/ic_prettiembee_logo.png)
 
 **Ứng dụng Root Quản lý & Áp dụng Theme Tuỳ Chỉnh cho MB Bank (`com.mbmobile`)**
 
