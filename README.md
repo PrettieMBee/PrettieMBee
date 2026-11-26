@@ -21,34 +21,9 @@
 - Thiết bị đã root bằng Magisk, KernelSU hoặc APatch
 - Đã cài đặt và mở MB Bank (`com.mbmobile`) ít nhất một lần
 
-## Cách sử dụng
+## Tài liệu
 
-1. Cài đặt file APK từ mục [GitHub Actions](https://github.com/premierere/PrettieMBee/actions/workflows/build.yml) hoặc [Releases](https://github.com/premierere/PrettieMBee/releases).
-2. Mở PrettieMBee và cấp quyền Superuser khi hệ thống hỏi.
-3. Kiểm tra trạng thái root và MB Bank ở tab **Trang chủ** (nếu dùng Dual App hoặc bản clone, đổi tên gói mục tiêu trong tab **Cài đặt**).
-4. Chuyển sang tab **Kho theme**, chọn một theme từ danh sách hoặc bấm **Nạp ZIP** để nhập gói từ máy.
-5. Trong bảng chi tiết theme:
-   - Giữ theme đích mặc định hoặc bấm **Đổi** để chọn vị trí theme MB Bank khác.
-   - Bật **Chế độ Priority** nếu tài khoản là MB Priority và theme có hỗ trợ.
-   - Bấm **Áp dụng theme** và chờ quá trình nạp hoàn tất.
-6. Khi MB Bank mở trang chi tiết theme, bấm **Áp dụng** trong MB Bank để kích hoạt.
-
-Để gỡ toàn bộ theme đã nạp và đưa MB Bank về giao diện gốc, vào **Cài đặt > Xoá toàn bộ theme MB Bank**.
-
-## Cấu trúc gói ZIP tuỳ chỉnh
-
-File `.zip` nhập thủ công cần chứa tối thiểu:
-
-```text
-theme.zip
-├── images/
-│   └── *.png
-└── theme/
-    ├── token.json
-    └── token_priority.json   # tuỳ chọn
-```
-
-Ứng dụng cũng tự giải nén khi các thư mục trên nằm bên trong một thư mục con hoặc một tệp `.bin` nén kiểu module Magisk cũ.
+- [Hướng dẫn tự tạo theme tuỳ chỉnh](docs/custom-theme.md)
 
 ## Biên dịch từ mã nguồn
 
