@@ -67,7 +67,7 @@ class ThemeRepository(private val context: Context) {
     }
 
     companion object {
-        const val REMOTE_CATALOG_URL = "https://raw.githubusercontent.com/thanhhuybynight/PrettieMBee/theme/community_catalog.json"
+        const val REMOTE_CATALOG_URL = "https://raw.githubusercontent.com/PrettieMBee/PrettieMBee/theme/community_catalog.json"
     }
 
     private val remoteCatalogCacheFile: File
