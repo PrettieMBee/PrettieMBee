@@ -73,7 +73,7 @@ class ThemeRepository(private val context: Context) {
     private val remoteCatalogCacheFile: File
         get() = File(context.filesDir, "remote_community_catalog.json")
 
-    suspend fun getCommunityThemes(forceRefresh: Boolean = false): List<CommunityTheme> = withContext(Dispatchers.IO) {
+    suspend fun getCommunityThemes(): List<CommunityTheme> = withContext(Dispatchers.IO) {
         val baseList = mutableListOf<CommunityTheme>()
         var jsonContent: String? = null
 

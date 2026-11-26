@@ -68,7 +68,6 @@ import androidx.compose.ui.unit.sp
 import anhiutangerine.prettiembee.BuildConfig
 import anhiutangerine.prettiembee.R
 import anhiutangerine.prettiembee.data.model.CommunityTheme
-import anhiutangerine.prettiembee.data.model.InstalledTheme
 import anhiutangerine.prettiembee.ui.components.FloatingBottomBar
 import anhiutangerine.prettiembee.ui.components.SegmentedGroup
 import anhiutangerine.prettiembee.ui.components.SegmentedItem
@@ -119,8 +118,6 @@ fun HomeScreen(
     isRootGranted: Boolean,
     isMbInstalled: Boolean,
     targetPackage: String,
-    installedThemeCount: Int,
-    installedThemes: List<InstalledTheme>,
     communityThemes: List<CommunityTheme>,
     isThemeDownloaded: (CommunityTheme) -> Boolean,
     onRefreshStatus: () -> Unit,

@@ -95,17 +95,13 @@ class RootRepository(private val context: Context) {
                 val countRes = Shell.cmd("ls -1 '$themeBase/$cleanUuid/images/'*.png 2>/dev/null | wc -l").exec()
                 val imgCount = countRes.out.firstOrNull()?.trim()?.toIntOrNull() ?: 0
 
-                val tokenRes = Shell.cmd("test -f '$themeBase/$cleanUuid/theme/token.json' && echo 1 || echo 0").exec()
-                val hasToken = tokenRes.out.firstOrNull()?.trim() == "1"
-
                 val matchedStoreTheme = storeCatalog.find { it.uuid.equals(cleanUuid, ignoreCase = true) }
 
                 resultList.add(
                     InstalledTheme(
                         uuid = cleanUuid,
                         storeTheme = matchedStoreTheme,
-                        imageCount = imgCount,
-                        hasTokenJson = hasToken
+                        imageCount = imgCount
                     )
                 )
             }
