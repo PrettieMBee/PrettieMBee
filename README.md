@@ -1,108 +1,56 @@
-# 🐝 PrettieMBee
+<img src="app/src/main/res/drawable/ic_prettiembee_logo.png" alt="PrettieMBee" width="72" />
 
-<div align="center">
+# PrettieMBee
 
-![PrettieMBee Banner](app/src/main/res/drawable/ic_prettiembee_logo.png)
+[![Build APK](https://github.com/PrettieMBee/PrettieMBee/actions/workflows/build.yml/badge.svg)](https://github.com/PrettieMBee/PrettieMBee/actions/workflows/build.yml)
 
-**Ứng dụng Root Quản lý & Áp dụng Theme Tuỳ Chỉnh cho MB Bank (`com.mbmobile`)**
+Công cụ Android yêu cầu quyền root để nạp theme tuỳ chỉnh cho MB Bank (`com.mbmobile`).
 
-[![Build PrettieMBee APK](https://github.com/anhiutangerine/PrettieMBee/actions/workflows/build.yml/badge.svg)](https://github.com/anhiutangerine/PrettieMBee/actions/workflows/build.yml)
-[![Platform](https://img.shields.io/badge/Platform-Android%20Root-brightgreen.svg)](https://github.com/anhiutangerine/PrettieMBee)
-[![Package](https://img.shields.io/badge/Package-anhiutangerine.prettiembee-blue.svg)](https://github.com/anhiutangerine/PrettieMBee)
-[![License](https://img.shields.io/badge/License-GPL--3.0-orange.svg)](LICENSE)
+## Tải về
 
-[Tính năng](#-tính-năng-nổi-bật) • [Cài đặt](#-cài-đặt--yêu-cầu) • [Cách sử dụng](#-hướng-dẫn-sử-dụng) • [Khắc phục sự cố](#-khắc-phục-sự-cố-tại-sao-app-này-tốt-hơn-magisk-module) • [Xây dựng APK](#-hướng-dẫn-build-apk)
+Tải bản build mới nhất tại mục [Releases (`canary`)](https://github.com/PrettieMBee/PrettieMBee/releases/tag/canary) hoặc lấy artifact từ [GitHub Actions](https://github.com/PrettieMBee/PrettieMBee/actions/workflows/build.yml).
 
-</div>
+## Tính năng
 
----
+- Nạp theme vào bất kỳ slot theme nào đã tải sẵn trên máy hoặc chọn từ danh mục MB Store, không bị cố định vào một UUID.
+- Tải theme cộng đồng từ GitHub (tự động fallback sang release `v1.0.0-themes` nếu không tải được từ nhánh `theme`) hoặc nhập trực tiếp file `.zip` từ bộ nhớ máy.
+- Tự xác định `UID:GID` của MB Bank và đặt lại quyền truy cập (`chown`, `chmod`, `restorecon`) trên thư mục `app_flutter`.
+- Hỗ trợ biến thể Priority (`theme/token_priority.json`) khi theme có sẵn và người dùng bật tuỳ chọn.
+- Mở nhanh trang chi tiết theme trong MB Bank qua deeplink `mbbank://installingnew` sau khi nạp xong.
 
-## 🌟 Giới thiệu
+## Yêu cầu
 
-**PrettieMBee** là ứng dụng Android mã nguồn mở được phát triển riêng cho các thiết bị đã Root (hỗ trợ toàn diện **Magisk**, **KernelSU**, **APatch**), cho phép người dùng tùy biến giao diện của ứng dụng **MB Bank (`com.mbmobile`)** theo phong cách cá nhân hóa (Anime, Minimalist AMOLED Dark, Pastel...) một cách an toàn và tiện lợi.
+- Android 8.0 (API 26) trở lên
+- Thiết bị đã root bằng Magisk, KernelSU hoặc APatch
+- Đã cài đặt và mở MB Bank (`com.mbmobile`) ít nhất một lần
 
-Trước đây, việc đổi theme MB thường dựa vào các module Magisk rời rạc (như `MBCP_Furina.zip`), vốn có rất nhiều nhược điểm:
-- Bị gán cứng (hardcode) vào duy nhất một UUID theme gốc.
-- Không thể áp dụng nếu người dùng chưa tải theme đó từ MB Store.
-- Thường xuyên bị lỗi mất phân quyền hoặc SELinux khiến app MB Bank văng về theme mặc định.
+## Tài liệu
 
-**PrettieMBee** ra đời nhằm giải quyết triệt để tất cả các hạn chế trên!
+- [Hướng dẫn tự tạo theme tuỳ chỉnh](docs/custom-theme.md)
 
----
+## Biên dịch từ mã nguồn
 
-## ✨ Tính năng nổi bật
+Yêu cầu JDK 17 và Android SDK (compileSdk 34):
 
-- 🎯 **Ánh xạ Linh Hoạt (Dynamic Mapping):** Cho phép bạn áp dụng bất kỳ theme cộng đồng nào (Furina, Elysia, Hina...) vào **BẤT KỲ theme nào** trong kho 33 theme gốc của MB Store hoặc theme bạn đang dùng trên máy.
-- 🔒 **Tự động sửa Lỗi Quyền Hạn & SELinux:** 
-  - Tự động phát hiện chính xác `UID:GID` của MB Bank (`stat -c '%u:%g'`).
-  - Thiết lập lại quyền POSIX chuẩn (`chmod 755` thư mục, `chmod 644` file).
-  - Tự động khôi phục ngữ cảnh SELinux (`restorecon -R`) tránh triệt để lỗi *Permission Denied*.
-- 👑 **Hỗ trợ Chế độ Priority (Tài khoản Ưu tiên):** Tích hợp sẵn biến thể `token_priority.json` tối ưu màu sắc và độ tương phản cho giao diện tài khoản MB Priority / Private.
-- ⚡ **Kích hoạt 1 chạm qua Deeplink:** Tự động phát Intent `mbbank://installingnew` mở ngay màn hình chi tiết theme để người dùng bấm "Áp dụng" trong nháy mắt.
-- 📦 **Tích hợp sẵn 7+ Theme Cộng Đồng Hot:**
-  - 🌊 **Furina (Regina of Waters)** - *Genshin Impact*
-  - 🌸 **Elysia (Miss Pink Elf)** - *Honkai Impact 3rd*
-  - 💜 **Sorasaki Hina (Gehenna)** - *Blue Archive*
-  - 💛 **Yurizono Seia (Tea Party)** - *Blue Archive*
-  - 🖤 **Pitch Black AMOLED Dark** - *Fukiame Minimalist*
-  - ❄️ **March 7th (Astral Express)** - *Honkai: Star Rail*
-  - 🎨 **Varesa Pastel Gradient** - *Aesthetic Minimalist*
-
----
-
-## 📱 Cài đặt & Yêu cầu
-
-1. **Thiết bị:** Android 8.0 (API 26) trở lên.
-2. **Quyền Root:** Magisk v24+, KernelSU v0.6+, hoặc APatch.
-3. **Ứng dụng ngân hàng:** Đã cài đặt MB Bank (`com.mbmobile`).
-
----
-
-## 🚀 Hướng dẫn sử dụng
-
-1. Tải và cài đặt file `PrettieMBee.apk`.
-2. Mở **PrettieMBee** và cấp quyền **Superuser (Root)** khi có hộp thoại nhắc.
-3. Tại trang chủ:
-   - Kiểm tra xem app đã nhận diện được **Quyền Root** và **MB Bank** hay chưa.
-   - Chọn một theme bạn yêu thích trong danh sách (hoặc lọc theo nhóm Genshin / Honkai / Blue Archive...).
-4. Trong bảng cấu hình theme:
-   - Xem theme đích mặc định. Nếu muốn đổi sang theme MB khác, nhấn **"Đổi"** và chọn một theme bất kỳ trong danh mục 33 theme của MB Bank.
-   - Bật **"Chế độ Priority"** nếu tài khoản ngân hàng của bạn là Priority.
-   - Nhấn **"Áp Dụng Theme Ngay"**.
-5. Đợi thanh tiến trình hoàn tất. MB Bank sẽ tự động mở trang chi tiết theme, bạn chỉ cần bấm nút **"Áp dụng" (Apply)** để hoàn tất!
-
----
-
-## 🛠️ Hướng dẫn Build APK
-
-### 1. Tự động qua GitHub Actions
-Kho lưu trữ này đã được cấu hình sẵn CI/CD trong `.github/workflows/build.yml`. Mỗi khi bạn push code hoặc tạo tag phát hành, GitHub Actions sẽ tự động biên dịch và tạo file APK trong mục **Artifacts** / **Releases**.
-
-### 2. Biên dịch thủ công trên máy tính
 ```bash
-git clone https://github.com/anhiutangerine/PrettieMBee.git
+git clone https://github.com/PrettieMBee/PrettieMBee.git
 cd PrettieMBee
-
-# Cấp quyền chạy cho Gradle wrapper
 chmod +x gradlew
-
-# Biên dịch Debug APK
 ./gradlew assembleDebug
-
-# File APK được tạo tại:
-# app/build/outputs/apk/debug/app-debug.apk
 ```
 
----
+File APK được tạo tại `app/build/outputs/apk/debug/app-debug.apk`. Workflow [`.github/workflows/build.yml`](.github/workflows/build.yml) tự động build APK khi push, cập nhật bản mới nhất từ `main` lên release `canary` và tạo release riêng khi đẩy tag `v*`.
 
-## ⚖️ Tuyên bố miễn trừ trách nhiệm (Disclaimer)
+## Tuyên bố miễn trừ trách nhiệm
 
-- **PrettieMBee** chỉ can thiệp vào các tài nguyên hình ảnh và màu sắc hiển thị nằm trong bộ nhớ đệm (`app_flutter/app_theme`) của MB Bank.
-- Ứng dụng **KHÔNG can thiệp**, **KHÔNG chỉnh sửa mã nguồn**, **KHÔNG sửa bytecode (`.dex`)**, và **KHÔNG bypass bất kỳ cơ chế xác thực bảo mật** nào của ngân hàng.
-- Dự án được phát triển hoàn toàn vì mục đích nghiên cứu giao diện và cá nhân hóa thẩm mỹ phi thương mại. Người dùng tự chịu trách nhiệm khi sử dụng trên thiết bị cá nhân.
+PrettieMBee chỉ thay đổi ảnh và tệp cấu hình màu trong thư mục `app_flutter/app_theme` của MB Bank. Ứng dụng không chỉnh sửa mã nguồn, tệp `.dex` hay cơ chế xác thực của ngân hàng. Dự án phục vụ cá nhân hoá giao diện phi thương mại; người dùng tự chịu trách nhiệm khi sử dụng trên thiết bị của mình.
 
----
+## Credits
 
-<div align="center">
-Made with 💛 by anhiutangerine & MBCP Community
-</div>
+- **Chủ repo & phát triển ứng dụng:** anhiutangerine ([premierere](https://github.com/premierere))
+- **Kho theme gốc & cộng đồng:** [cuynu](https://cuynutt.ddns.net/mbcp/tweaked-mbflutter-themes) cùng cộng đồng trong và ngoài MBCP
+- **Đóng góp theme:** cuynu, TsumugiShiina0, nguyencaoantuong, khoictm, Fukiame, minhwuangbeo, Meowice
+
+## Giấy phép
+
+Phát hành theo giấy phép [GPL-3.0](LICENSE).
