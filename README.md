@@ -41,7 +41,7 @@ chmod +x gradlew
 
 File APK được tạo tại `app/build/outputs/apk/debug/app-debug.apk`. Workflow [`.github/workflows/build.yml`](.github/workflows/build.yml) tự động build APK khi push, cập nhật bản mới nhất từ `main` lên release `canary` và tạo release riêng khi đẩy tag `v*`.
 
-## Lưu ý
+## Tuyên bố miễn trừ trách nhiệm
 
 PrettieMBee chỉ thay đổi ảnh và tệp cấu hình màu trong thư mục `app_flutter/app_theme` của MB Bank. Ứng dụng không chỉnh sửa mã nguồn, tệp `.dex` hay cơ chế xác thực của ngân hàng. Dự án phục vụ cá nhân hoá giao diện phi thương mại; người dùng tự chịu trách nhiệm khi sử dụng trên thiết bị của mình.
 
