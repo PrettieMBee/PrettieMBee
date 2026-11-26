@@ -43,7 +43,7 @@ Nếu dùng Dual App hoặc bản clone, thay `com.mbmobile` bằng tên gói t�
 
 ### Cách B: Dùng một gói mẫu từ nhánh `theme`
 
-Tải một file `.zip` bất kỳ trong nhánh [`theme`](https://github.com/premierere/PrettieMBee/tree/theme/themes), giải nén rồi thay thế ảnh và màu theo ý muốn.
+Tải một file `.zip` bất kỳ trong nhánh [`theme`](https://github.com/PrettieMBee/PrettieMBee/tree/theme/themes), giải nén rồi thay thế ảnh và màu theo ý muốn.
 
 ## 3. Chỉnh sửa hình ảnh (`images/`)
 

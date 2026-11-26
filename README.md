@@ -2,7 +2,7 @@
 
 # PrettieMBee
 
-[![Build APK](https://github.com/premierere/PrettieMBee/actions/workflows/build.yml/badge.svg)](https://github.com/premierere/PrettieMBee/actions/workflows/build.yml)
+[![Build APK](https://github.com/PrettieMBee/PrettieMBee/actions/workflows/build.yml/badge.svg)](https://github.com/PrettieMBee/PrettieMBee/actions/workflows/build.yml)
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
 
 Ứng dụng Android yêu cầu quyền root để nạp theme tuỳ chỉnh vào ứng dụng MB Bank (`com.mbmobile`).
@@ -30,7 +30,7 @@
 Yêu cầu JDK 17 và Android SDK (compileSdk 34):
 
 ```bash
-git clone https://github.com/premierere/PrettieMBee.git
+git clone https://github.com/PrettieMBee/PrettieMBee.git
 cd PrettieMBee
 chmod +x gradlew
 ./gradlew assembleDebug
