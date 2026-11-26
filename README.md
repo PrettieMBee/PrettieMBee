@@ -9,12 +9,11 @@
 
 ## Tính năng
 
-- **Ánh xạ theme đích linh hoạt:** nạp bất kỳ theme nào vào một theme đã tải sẵn trên máy hoặc vào một trong 33 gói theme trong danh mục MB Store.
-- **Kho theme và nhập ZIP thủ công:** đồng bộ danh sách theme cộng đồng từ GitHub (có bộ đệm ngoại tuyến và 7 theme mặc định kèm sẵn), hỗ trợ nhập file `.zip` từ bộ nhớ máy (bao gồm cấu trúc chuẩn `images/*.png` + `theme/token.json`, thư mục lồng nhau và gói `.bin` từ module Magisk cũ).
+- **Ánh xạ theme đích linh hoạt:** nạp theme vào bất kỳ theme MB Bank nào đã tải sẵn trên máy hoặc chọn từ danh mục MB Store, không bị cố định vào một UUID duy nhất.
+- **Kho theme và nhập ZIP thủ công:** tải theme cộng đồng từ GitHub hoặc nhập trực tiếp file `.zip` từ bộ nhớ máy (hỗ trợ cấu trúc `images/*.png` + `theme/token.json`, thư mục lồng nhau và gói `.bin` từ module Magisk).
 - **Xử lý quyền và SELinux tự động:** tự lấy `UID:GID` của gói MB Bank, sao chép tài nguyên (có cơ chế fallback sang `tar` stream khi shell `cp` lỗi), chạy `chown -R`, `chmod` và `restorecon -R` trên thư mục `app_flutter`.
 - **Biến thể Priority:** tự động dùng `theme/token_priority.json` nếu theme hỗ trợ và người dùng bật tuỳ chọn Priority.
 - **Mở nhanh bằng deeplink:** sau khi nạp xong có thể tự mở MB Bank vào thẳng trang chi tiết theme đích qua `mbbank://installingnew` để bấm áp dụng.
-- **Quản lý tiện ích trong ứng dụng:** hỗ trợ đổi tên gói mục tiêu cho Dual App / bản clone, khôi phục toàn bộ theme MB Bank về mặc định, ghim hoặc xoá theme đã tải (nhấn giữ thẻ theme), chuyển ngôn ngữ Anh / Việt, và tuỳ biến giao diện ứng dụng (Sáng, Tối, OLED, hình nền, màu chủ đạo, DPI).
 
 ## Yêu cầu
 
