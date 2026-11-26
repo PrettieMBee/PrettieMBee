@@ -41,9 +41,9 @@ adb pull /sdcard/mb_base_theme ./my-theme
 
 Nếu dùng Dual App hoặc bản clone, thay `com.mbmobile` bằng tên gói tương ứng.
 
-### Cách B: Dùng một gói mẫu từ nhánh `theme`
+### Cách B: Dùng một gói mẫu có sẵn
 
-Tải một file `.zip` bất kỳ trong nhánh [`theme`](https://github.com/PrettieMBee/PrettieMBee/tree/theme/themes), giải nén rồi thay thế ảnh và màu theo ý muốn.
+Tải một file `.zip` bất kỳ trong nhánh [`theme`](https://github.com/PrettieMBee/PrettieMBee/tree/theme/themes) hoặc từ release [`v1.0.0-themes`](https://github.com/PrettieMBee/PrettieMBee/releases/tag/v1.0.0-themes), giải nén rồi thay thế ảnh và màu theo ý muốn.
 
 ## 3. Chỉnh sửa hình ảnh (`images/`)
 
@@ -61,7 +61,7 @@ Một số ảnh thường thay đầu tiên:
 | `general_bg_success.png` | Nền màn hình thông báo thành công |
 | `coreBanking_img_successBackground.png` | Nền màn hình giao dịch thành công |
 
-Chỉ cần giữ các ảnh có trong bộ gốc (hoặc ảnh bạn muốn thay); khi nạp, PrettieMBee sẽ thay thế toàn bộ thư mục `images/` của slot theme đích bằng thư mục `images/` trong gói ZIP của bạn, vì vậy không nên xoá bớt các ảnh gốc cần thiết khác.
+Khi nạp, PrettieMBee sẽ xoá và thay toàn bộ thư mục `images/` của slot theme đích bằng thư mục `images/` trong gói ZIP. Vì vậy, bạn nên giữ đủ bộ ảnh gốc và chỉ ghi đè những ảnh muốn tuỳ biến.
 
 ## 4. Chỉnh sửa bảng màu (`theme/token.json`)
 

@@ -3,17 +3,20 @@
 # PrettieMBee
 
 [![Build APK](https://github.com/PrettieMBee/PrettieMBee/actions/workflows/build.yml/badge.svg)](https://github.com/PrettieMBee/PrettieMBee/actions/workflows/build.yml)
-[![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
 
-Ứng dụng Android yêu cầu quyền root để nạp theme tuỳ chỉnh vào ứng dụng MB Bank (`com.mbmobile`).
+Công cụ Android yêu cầu quyền root để nạp theme tuỳ chỉnh cho MB Bank (`com.mbmobile`).
+
+## Tải về
+
+Tải bản build mới nhất tại mục [Releases (`canary`)](https://github.com/PrettieMBee/PrettieMBee/releases/tag/canary) hoặc lấy artifact từ [GitHub Actions](https://github.com/PrettieMBee/PrettieMBee/actions/workflows/build.yml).
 
 ## Tính năng
 
-- **Ánh xạ theme đích linh hoạt:** nạp theme vào bất kỳ theme MB Bank nào đã tải sẵn trên máy hoặc chọn từ danh mục MB Store, không bị cố định vào một UUID duy nhất.
-- **Kho theme và nhập ZIP thủ công:** tải theme cộng đồng từ GitHub hoặc nhập trực tiếp file `.zip` từ bộ nhớ máy (hỗ trợ cấu trúc `images/*.png` + `theme/token.json`, thư mục lồng nhau và gói `.bin` từ module Magisk).
-- **Xử lý quyền và SELinux tự động:** tự lấy `UID:GID` của gói MB Bank, sao chép tài nguyên (có cơ chế fallback sang `tar` stream khi shell `cp` lỗi), chạy `chown -R`, `chmod` và `restorecon -R` trên thư mục `app_flutter`.
-- **Biến thể Priority:** tự động dùng `theme/token_priority.json` nếu theme hỗ trợ và người dùng bật tuỳ chọn Priority.
-- **Mở nhanh bằng deeplink:** sau khi nạp xong có thể tự mở MB Bank vào thẳng trang chi tiết theme đích qua `mbbank://installingnew` để bấm áp dụng.
+- Nạp theme vào bất kỳ slot theme nào đã tải sẵn trên máy hoặc chọn từ danh mục MB Store, không bị cố định vào một UUID.
+- Tải theme cộng đồng từ GitHub (tự động fallback sang release `v1.0.0-themes` nếu không tải được từ nhánh `theme`) hoặc nhập trực tiếp file `.zip` từ bộ nhớ máy.
+- Tự xác định `UID:GID` của MB Bank và đặt lại quyền truy cập (`chown`, `chmod`, `restorecon`) trên thư mục `app_flutter`.
+- Hỗ trợ biến thể Priority (`theme/token_priority.json`) khi theme có sẵn và người dùng bật tuỳ chọn.
+- Mở nhanh trang chi tiết theme trong MB Bank qua deeplink `mbbank://installingnew` sau khi nạp xong.
 
 ## Yêu cầu
 
@@ -36,11 +39,11 @@ chmod +x gradlew
 ./gradlew assembleDebug
 ```
 
-File APK được tạo tại `app/build/outputs/apk/debug/app-debug.apk`. Ngoài ra, workflow [`.github/workflows/build.yml`](.github/workflows/build.yml) tự động build Debug APK trên mỗi lần push và đính kèm vào GitHub Release khi tạo tag `v*`.
+File APK được tạo tại `app/build/outputs/apk/debug/app-debug.apk`. Workflow [`.github/workflows/build.yml`](.github/workflows/build.yml) tự động build APK khi push, cập nhật bản mới nhất từ `main` lên release `canary` và tạo release riêng khi đẩy tag `v*`.
 
 ## Lưu ý
 
-PrettieMBee chỉ thay đổi ảnh và tệp cấu hình màu trong thư mục dữ liệu giao diện `app_flutter/app_theme` của MB Bank. Ứng dụng không chỉnh sửa mã nguồn, tệp `.dex` hay cơ chế xác thực của ứng dụng ngân hàng. Dự án mang tính cá nhân hoá giao diện phi thương mại; người dùng tự chịu trách nhiệm khi sử dụng trên thiết bị của mình.
+PrettieMBee chỉ thay đổi ảnh và tệp cấu hình màu trong thư mục `app_flutter/app_theme` của MB Bank. Ứng dụng không chỉnh sửa mã nguồn, tệp `.dex` hay cơ chế xác thực của ngân hàng. Dự án phục vụ cá nhân hoá giao diện phi thương mại; người dùng tự chịu trách nhiệm khi sử dụng trên thiết bị của mình.
 
 ## Giấy phép
 
