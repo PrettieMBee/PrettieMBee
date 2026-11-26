@@ -2,7 +2,6 @@
 <!-- Vietnamese. Keep keys in sync with values/strings.xml -->
 <resources>
     <string name="app_name">PrettieMBee</string>
-    <string name="mascot_desc">Mèo PrettieMBee</string>
 
     <string name="nav_home">Trang chủ</string>
     <string name="nav_store">Kho theme</string>
@@ -25,7 +24,6 @@
     <string name="action_apply">Áp dụng</string>
     <string name="action_choose_image">Chọn ảnh</string>
     <string name="action_change">Đổi</string>
-    <string name="action_remove">Gỡ</string>
     <string name="action_reset_themes">Xoá và khôi phục</string>
     <string name="operation_failed">Thao tác thất bại</string>
     <string name="error_generic">Lỗi: %1$s</string>
@@ -56,7 +54,6 @@
     <string name="dpi_dialog_title">Mật độ hiển thị (DPI)</string>
     <string name="dpi_dialog_hint">Điều chỉnh tỷ lệ giao diện riêng cho PrettieMBee:</string>
     <string name="dpi_custom">Tuỳ chỉnh:</string>
-    <string name="dpi_system_default">Mặc định (Theo hệ thống)</string>
     <string name="dpi_value">Mặc định (Theo hệ thống)</string>
     <string name="dpi_value_named">%1$d DPI</string>
     <string name="dpi_preset_small">Nhỏ (320 DPI)</string>
@@ -83,10 +80,7 @@
     <string name="store_sync_github">Đồng bộ từ GitHub</string>
     <string name="store_load_zip">Nạp ZIP</string>
     <string name="store_downloaded">Đã tải</string>
-    <string name="store_pinned">Ghim</string>
     <string name="store_pinned_badge">Đã ghim</string>
-    <string name="store_pin">Ghim</string>
-    <string name="store_unpin">Bỏ ghim</string>
     <string name="store_pin_top">Ghim lên đầu</string>
     <string name="store_unpin_action">Bỏ ghim</string>
     <string name="store_delete_download">Xoá bản tải</string>
@@ -140,8 +134,6 @@
 
     <string name="picker_title">Chọn theme đích MB Bank</string>
     <string name="picker_subtitle">Theme tuỳ chỉnh sẽ ghi đè vào gói theme này trong MB Bank</string>
-    <string name="picker_tab_installed">Đã cài</string>
-    <string name="picker_tab_store">Kho theme</string>
     <string name="picker_search_hint">Tìm theo tên hoặc UUID…</string>
     <string name="picker_installed_count">%1$d đã cài</string>
     <string name="picker_store_count">%1$d khả dụng</string>
@@ -151,14 +143,9 @@
     <string name="picker_uuid_label">UUID: %1$s</string>
 
     <string name="flash_back">Quay lại</string>
-    <string name="flash_install_log">Nhật ký cài đặt</string>
     <string name="flash_success_title">Cài theme thành công</string>
-    <string name="flash_success_body">%1$s đã sẵn sàng. Mở MB Bank và bấm Áp dụng để hoàn tất.</string>
-    <string name="flash_open_mb">Mở MB Bank</string>
     <string name="flash_copy_log">Sao chép log</string>
     <string name="flash_failed_title">Cài đặt thất bại</string>
-    <string name="flash_failed_short">Lỗi</string>
-    <string name="flash_retry">Thử lại</string>
     <string name="flash_copied">Đã sao chép log</string>
     <string name="flash_in_progress">Đang áp dụng theme…</string>
     <string name="flash_log_version">Phiên bản: v1.0 (%1$s)</string>
@@ -174,7 +161,6 @@
     <string name="error_zip_structure">ZIP không đúng cấu trúc (cần images/*.png + theme/token.json)</string>
     <string name="error_zip_contents">ZIP không đúng cấu trúc (cần images/*.png + theme/token.json). Nội dung sau giải nén: %1$s</string>
     <string name="error_zip_invalid">File ZIP không hợp lệ: cần images/*.png và theme/token.json</string>
-    <string name="error_zip_no_token">File ZIP không hợp lệ: thiếu file theme/token.json</string>
     <string name="error_zip_read">Không thể đọc file ZIP từ bộ nhớ máy</string>
     <string name="error_root_required">Yêu cầu quyền root để thực hiện.</string>
     <string name="error_missing_theme_assets">Thiếu tài nguyên theme tại %1$s (thiếu: %2$s)</string>
@@ -197,7 +183,6 @@
     <string name="log_apply_priority">Áp dụng cấu hình Priority Tokens…</string>
     <string name="log_images_empty">images/ (rỗng)</string>
     <string name="log_prep_target">Chuẩn bị thư mục đích: %1$s</string>
-    <string name="log_error_prefix">Lỗi: %1$s</string>
     <string name="log_mkdir_failed">Không thể khởi tạo thư mục đích:\n%1$s</string>
     <string name="log_mkdir_blank">Lệnh mkdir không thể tạo thư mục tại %1$s</string>
     <string name="log_copy_assets">Ghi đè tài nguyên vào thư mục theme của MB Bank…</string>
@@ -219,9 +204,7 @@
     <string name="log_tar_su_failed">Không thể thực thi lệnh tar qua su</string>
     <string name="log_cat_exit">cat kết thúc với mã %1$d: %2$s</string>
     <string name="log_cat_su_failed">Không thể ghi file qua su</string>
-    <string name="log_reset_start">Đang reset theme MB Bank…</string>
     <string name="log_reset_failed">Không thể khởi tạo thư mục rỗng cho theme (mã lỗi %1$d): %2$s</string>
     <string name="log_reset_mkdir_blank">Lệnh mkdir không thể tạo %1$s</string>
 
-    <string name="splash_subtitle">MB Bank Custom Theme Injector</string>
 </resources>

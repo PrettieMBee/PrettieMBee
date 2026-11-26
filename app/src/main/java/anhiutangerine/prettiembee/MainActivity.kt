@@ -1,20 +1,16 @@
 package anhiutangerine.prettiembee
 
 import android.content.Context
-import android.content.res.Configuration
-import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import anhiutangerine.prettiembee.data.model.CommunityTheme
 import anhiutangerine.prettiembee.data.model.InjectConfig
-import anhiutangerine.prettiembee.data.model.InjectResult
 import anhiutangerine.prettiembee.data.model.InstalledTheme
 import anhiutangerine.prettiembee.data.model.MbStoreTheme
 import anhiutangerine.prettiembee.data.repository.RootRepository
@@ -28,8 +24,6 @@ import anhiutangerine.prettiembee.ui.screens.ThemeDetailSheet
 import anhiutangerine.prettiembee.ui.theme.PrettieMBeeTheme
 import anhiutangerine.prettiembee.ui.theme.ThemeConfig
 import kotlinx.coroutines.launch
-import java.io.File
-import java.util.Locale
 
 class MainActivity : ComponentActivity() {
 
@@ -118,8 +112,6 @@ class MainActivity : ComponentActivity() {
                             isRootGranted = isRootGranted,
                             isMbInstalled = isMbInstalled,
                             targetPackage = targetPackage,
-                            installedThemeCount = installedThemes.size,
-                            installedThemes = installedThemes,
                             communityThemes = communityThemes,
                             isThemeDownloaded = { theme -> theme.id in downloadedThemeIds },
                             onRefreshStatus = {

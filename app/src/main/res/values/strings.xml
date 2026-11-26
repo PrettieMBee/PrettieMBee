@@ -2,7 +2,6 @@
 <!-- English (source locale). Keep keys stable for Weblate / Crowdin. -->
 <resources>
     <string name="app_name">PrettieMBee</string>
-    <string name="mascot_desc">PrettieMBee Cat</string>
 
     <!-- Navigation -->
     <string name="nav_home">Home</string>
@@ -28,7 +27,6 @@
     <string name="action_apply">Apply</string>
     <string name="action_choose_image">Choose image</string>
     <string name="action_change">Change</string>
-    <string name="action_remove">Remove</string>
     <string name="action_reset_themes">Clear &amp; restore</string>
     <string name="operation_failed">Action failed</string>
     <string name="error_generic">Error: %1$s</string>
@@ -64,7 +62,6 @@
     <string name="dpi_dialog_title">Display density (DPI)</string>
     <string name="dpi_dialog_hint">Override UI density for PrettieMBee only:</string>
     <string name="dpi_custom">Custom:</string>
-    <string name="dpi_system_default">System default</string>
     <string name="dpi_value">System default</string>
     <string name="dpi_value_named">%1$d DPI</string>
     <string name="dpi_preset_small">Small (320 DPI)</string>
@@ -94,10 +91,7 @@
     <string name="store_sync_github">Sync from GitHub</string>
     <string name="store_load_zip">Import ZIP</string>
     <string name="store_downloaded">Downloaded</string>
-    <string name="store_pinned">Pinned</string>
     <string name="store_pinned_badge">Pinned</string>
-    <string name="store_pin">Pin</string>
-    <string name="store_unpin">Unpin</string>
     <string name="store_pin_top">Pin to top</string>
     <string name="store_unpin_action">Unpin</string>
     <string name="store_delete_download">Delete download</string>
@@ -154,8 +148,6 @@
     <!-- Target picker -->
     <string name="picker_title">Choose target MB Bank theme</string>
     <string name="picker_subtitle">A custom theme overwrites this package slot in MB Bank</string>
-    <string name="picker_tab_installed">Installed</string>
-    <string name="picker_tab_store">Theme store</string>
     <string name="picker_search_hint">Search by name or UUID…</string>
     <string name="picker_installed_count">%1$d installed</string>
     <string name="picker_store_count">%1$d available</string>
@@ -166,14 +158,9 @@
 
     <!-- Flash screen -->
     <string name="flash_back">Back</string>
-    <string name="flash_install_log">Installation log</string>
     <string name="flash_success_title">Theme installed</string>
-    <string name="flash_success_body">%1$s is ready. Open MB Bank and tap Apply to finish.</string>
-    <string name="flash_open_mb">Open MB Bank</string>
     <string name="flash_copy_log">Copy log</string>
     <string name="flash_failed_title">Installation failed</string>
-    <string name="flash_failed_short">Error</string>
-    <string name="flash_retry">Try again</string>
     <string name="flash_copied">Log copied to clipboard</string>
     <string name="flash_in_progress">Applying theme…</string>
     <string name="flash_log_version">Version: v1.0 (%1$s)</string>
@@ -190,7 +177,6 @@
     <string name="error_zip_structure">ZIP layout is invalid (need images/*.png + theme/token.json)</string>
     <string name="error_zip_contents">ZIP layout is invalid (need images/*.png + theme/token.json). Extracted: %1$s</string>
     <string name="error_zip_invalid">Invalid ZIP: needs images/*.png and theme/token.json</string>
-    <string name="error_zip_no_token">Invalid ZIP: missing theme/token.json</string>
     <string name="error_zip_read">Cannot read ZIP from device storage</string>
     <string name="error_root_required">Root access is required for this action.</string>
     <string name="error_missing_theme_assets">Missing theme assets at %1$s (missing: %2$s)</string>
@@ -214,7 +200,6 @@
     <string name="log_apply_priority">Applying Priority token config…</string>
     <string name="log_images_empty">images/ (empty)</string>
     <string name="log_prep_target">Preparing target directory: %1$s</string>
-    <string name="log_error_prefix">Error: %1$s</string>
     <string name="log_mkdir_failed">Cannot create target directory:\n%1$s</string>
     <string name="log_mkdir_blank">mkdir could not create the directory at %1$s</string>
     <string name="log_copy_assets">Writing assets into MB Bank theme directory…</string>
@@ -236,10 +221,6 @@
     <string name="log_tar_su_failed">Cannot run tar via su</string>
     <string name="log_cat_exit">cat exited with code %1$d: %2$s</string>
     <string name="log_cat_su_failed">Cannot write file via su</string>
-    <string name="log_reset_start">Resetting MB Bank themes…</string>
     <string name="log_reset_failed">Cannot prepare empty theme directory (exit code %1$d): %2$s</string>
     <string name="log_reset_mkdir_blank">mkdir could not create %1$s</string>
-
-    <!-- Splash / misc -->
-    <string name="splash_subtitle">MB Bank custom theme injector</string>
 </resources>

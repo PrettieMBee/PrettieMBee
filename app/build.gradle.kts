@@ -29,23 +29,11 @@ android {
         versionCode = 1
         versionName = "1.0"
         buildConfigField("String", "GIT_HASH", "\"$gitCommitHash\"")
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-        debug {
-            applicationIdSuffix = ""
         }
     }
     compileOptions {
@@ -68,18 +56,15 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.material.icons.extended)
 
     // LibSu - John Wu's Root Shell library
     implementation(libs.libsu.core)
-    implementation(libs.libsu.io)
 
     // Serialization & JSON
     implementation(libs.kotlinx.serialization.json)
@@ -87,6 +72,4 @@ dependencies {
 
     // Coil for Compose image preview
     implementation(libs.coil.compose)
-
-    debugImplementation(libs.androidx.ui.tooling)
 }
