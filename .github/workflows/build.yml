@@ -71,13 +71,14 @@ jobs:
 
           gh release edit canary \
             --title "canary" \
-            --prerelease \
+            --prerelease=false \
+            --latest \
             --notes "$NOTES"
         else
           gh release create canary "$APK_NAME" \
             --target "${GITHUB_SHA}" \
             --title "canary" \
-            --prerelease \
+            --latest \
             --notes "$NOTES"
         fi
 
