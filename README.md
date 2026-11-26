@@ -1,12 +1,10 @@
-# PrettieMBee - MBCP Community Themes Store
+# PrettieMBee - Community Themes Store
 
-Kho lưu trữ theme cộng đồng chính thức dành cho ứng dụng **PrettieMBee**. Nhánh `theme` được lưu trữ độc lập để cung cấp trực tiếp tài nguyên giao diện cho ứng dụng di động qua mạng CDN GitHub.
+Kho lưu trữ theme cộng đồng cho ứng dụng PrettieMBee (nhánh `theme`).
 
----
+## Danh sách theme hiện có (22)
 
-## Danh sách Theme hiện có
-
-| ID | Tên Theme | Chủ đề / Series | Tác giả | Kích thước |
+| ID | Tên theme | Chủ đề / Series | Tác giả | Kích thước |
 |---|---|---|---|---|
 | `furina` | Furina (Regina of Waters) | Genshin Impact | @TsumugiShiina0 | 7.4 MB |
 | `ganyu` | Ganyu (Secretary of Yuehai Pavilion) | Genshin Impact | cuynu, TsumugiShiina0 | 5.1 MB |
@@ -21,29 +19,39 @@ Kho lưu trữ theme cộng đồng chính thức dành cho ứng dụng **Prett
 | `elysia` | Elysia (Miss Pink Elf) | Honkai Impact 3rd | MBCP Community | 10.8 MB |
 | `hina` | Sorasaki Hina (Gehenna) | Blue Archive | MBCP Community | 30.6 MB |
 | `seia` | Yurizono Seia (Tea Party) | Blue Archive | MBCP Community | 5.9 MB |
-| `pitchblack` | Pitch Black (AMOLED Dark) | Minimalist / Utility | Fukiame | 4.0 MB |
+| `pitchblack` | Pitch Black (True AMOLED Dark) | Minimalist / Utility | Fukiame | 4.0 MB |
 | `march7th` | March 7th (Astral Express) | Honkai: Star Rail | MBCP Community | 11.1 MB |
-| `varesa` | Varesa Pastel Gradient | Aesthetic | MBCP Community | 10.9 MB |
-
----
+| `varesa` | Varesa Pastel | Aesthetic | MBCP Community | 10.9 MB |
+| `bronya` | Bronya | Honkai Impact 3rd | cuynu, @nguyencaoantuong | 24.7 MB |
+| `fuhua` | Fu Hua | Honkai Impact 3rd | cuynu, @nguyencaoantuong | 9.3 MB |
+| `keqing` | Keqing | Genshin Impact | TsumugiShiina0, cuynu | 14.8 MB |
+| `mei` | Raiden Mei | Honkai Impact 3rd | cuynu, @nguyencaoantuong | 17.4 MB |
+| `mika` | Misono Mika (Tea Party) | Blue Archive | cuynu, @khoictm | 21.1 MB |
+| `nagisa` | Kirifuji Nagisa (Tea Party) | Blue Archive | cuynu, @khoictm | 10.5 MB |
 
 ## Cấu trúc thư mục
 
-```
+```text
 .
-├── community_catalog.json   # Tệp danh mục chính thức được ứng dụng đọc
+├── community_catalog.json
 ├── themes/
+│   ├── bronya.zip
 │   ├── castorice.zip
 │   ├── cloudy.zip
 │   ├── elysia.zip
+│   ├── fuhua.zip
 │   ├── furina.zip
 │   ├── ganyu.zip
 │   ├── hina.zip
 │   ├── hoshino.zip
+│   ├── keqing.zip
 │   ├── lilith.zip
 │   ├── march7th.zip
+│   ├── mei.zip
+│   ├── mika.zip
 │   ├── miku.zip
 │   ├── mikuv2.zip
+│   ├── nagisa.zip
 │   ├── nightlyirl.zip
 │   ├── paimon.zip
 │   ├── pitchblack.zip
@@ -52,20 +60,13 @@ Kho lưu trữ theme cộng đồng chính thức dành cho ứng dụng **Prett
 └── README.md
 ```
 
-Mỗi file ZIP đều tuân thủ cấu trúc nạp theme tiêu chuẩn:
-- `images/`: Chứa các tài nguyên hình ảnh được tùy biến (PNG)
-- `theme/token.json`: Định nghĩa bảng màu và style giao diện
-- `theme/token_priority.json`: Bảng màu tối ưu hóa dành cho tài khoản MB Priority (nếu có)
+Mỗi file ZIP tuân thủ cấu trúc chuẩn của PrettieMBee:
 
-Các theme được convert từ gói Magisk MBCP (`MBCP_*.zip`) đã được unwrap `.bin` lồng nhau và flatten về cấu trúc chuẩn PrettieMBee.
-
----
+- `images/`: các tệp hình ảnh giao diện (`.png`)
+- `theme/token.json`: bảng màu và design token
+- `theme/token_priority.json`: bảng màu riêng cho tài khoản MB Priority (nếu có)
 
 ## Nguồn
 
-- Gốc Magisk/MBCP: cộng đồng MBCP (cuynu, TsumugiShiina0, Meowice, nguyencaoantuong, Fukiame…)
-- App PrettieMBee: https://github.com/thanhhuybynight/PrettieMBee
-
-## License
-
-Xem LICENSE ở repo chính.
+- Theme cộng đồng từ kho MBCP (`cuynutt.ddns.net/mbcp/tweaked-mbflutter-themes`)
+- Ứng dụng PrettieMBee: https://github.com/premierere/PrettieMBee
